@@ -198,6 +198,10 @@ func (b definitionBuilder) buildProperty(field reflect.StructField, model *spec.
 	case fieldKind == reflect.Map:
 		jsonName, prop := b.buildMapTypeProperty(field, jsonName, modelName)
 		return jsonName, modelDescription, prop
+        case fieldKind == reflect.Interface:
+                var pType = "object"
+                prop.Type = []string{pType}
+                return jsonName, modelDescription, prop
 	}
 
 	fieldTypeName := keyFrom(fieldType, b.Config)
